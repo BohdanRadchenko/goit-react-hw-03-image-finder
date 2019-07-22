@@ -3,26 +3,33 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './PhotoCard.module.css';
 
-const PhotoCard = () => (
+const PhotoCard = ({
+  webformatURL,
+  largeImageURL,
+  likes,
+  views,
+  comments,
+  downloads,
+}) => (
   <div className={styles.photoCard}>
-    <img src="" alt="" />
+    <img src={webformatURL} alt="" />
 
     <div className={styles.stats}>
       <p className={styles.statsItem}>
         <i className={styles.materialIcons}>thumb_up</i>
-        1108
+        {likes}
       </p>
       <p className={styles.statsItem}>
         <i className={styles.materialIcons}>visibility</i>
-        320321
+        {views}
       </p>
       <p className={styles.statsItem}>
         <i className={styles.materialIcons}>comment</i>
-        129
+        {comments}
       </p>
       <p className={styles.statsItem}>
         <i className={styles.materialIcons}>cloud_download</i>
-        176019
+        {downloads}
       </p>
     </div>
 

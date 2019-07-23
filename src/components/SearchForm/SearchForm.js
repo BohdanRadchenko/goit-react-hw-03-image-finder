@@ -33,6 +33,7 @@ class SearchForm extends Component {
           placeholder="Search images..."
           value={value}
           onChange={this.getValue}
+          className={styles.searchFormInput}
         />
       </form>
     );

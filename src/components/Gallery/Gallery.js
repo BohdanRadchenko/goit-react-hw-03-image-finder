@@ -1,13 +1,13 @@
 /*eslint-disable*/
 import React from 'react';
-import styles from './Gallery.module.css';
 import PhotoCard from '../PhotoCard/PhotoCard';
+import styles from './Gallery.module.css';
 
 const Gallery = ({ items }) => {
   return (
     <ul className={styles.gallery}>
       {items.map(el => (
-        <li key={el.id}>
+        <li className={styles.photoCard} key={el.id}>
           <PhotoCard {...el} />
         </li>
       ))}

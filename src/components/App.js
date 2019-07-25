@@ -10,7 +10,8 @@ import LoadMore from './LoadMore/LoadMore';
 class App extends Component {
   state = {
     items: [],
-    searchValue: 'popular',
+    emptyItems: false,
+    searchValue: '',
     perPage: '12',
   };
 
@@ -24,14 +25,19 @@ class App extends Component {
 
   componentDidMount() {
     const { searchValue, perPage } = this.state;
-    // this.findByApi(searchValue);
+    this.servicesAPI(searchValue);
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { searchValue, perPage } = this.state;
+    const { searchValue, perPage, items } = this.state;
     if (prevState.searchValue !== searchValue) {
       this.resetPerPage();
       this.servicesAPI(searchValue, perPage);
+      // if (items.length === 0) {
+      //   this.setState({
+      //     emptyItems: true,
+      //   });
+      // }
     }
     if (prevState.perPage !== perPage && perPage !== '12') {
       this.servicesAPI(searchValue, perPage);
@@ -58,13 +64,18 @@ class App extends Component {
   };
 
   render() {
-    const { items, searchValue, perPage } = this.state;
+    const { items, searchValue, perPage, emptyItems } = this.state;
     return (
       <div className={styles.app}>
         <SearchForm
           getSearchValue={this.getSearchValue}
           searchValue={searchValue}
         />
+        {emptyItems && (
+          <div>
+            <p>null</p>
+          </div>
+        )}
         <Gallery items={items} handleMoreClick={this.handleMoreClick} />
         {items.length > 0 && (
           <LoadMore

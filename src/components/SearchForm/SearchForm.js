@@ -3,7 +3,10 @@ import React, { Component } from 'react';
 import styles from './SearchForm.module.css';
 
 class SearchForm extends Component {
-  state = { value: '' };
+  state = {
+    value: '',
+    upperSearch: 'Search images...',
+  };
 
   getValue = e => {
     this.setState({ value: e.target.value });
@@ -14,7 +17,15 @@ class SearchForm extends Component {
     const { value } = this.state;
     e.preventDefault();
     getSearchValue(value);
+    this.setUpperSearch(value);
     this.reset();
+  };
+
+  setUpperSearch = value => {
+    const upper = value.toUpperCase();
+    this.setState({
+      upperSearch: upper,
+    });
   };
 
   reset = () => {
@@ -24,13 +35,15 @@ class SearchForm extends Component {
   };
 
   render() {
-    const { value } = this.state;
+    const { value, upperSearch } = this.state;
+    const { searchValue } = this.props;
     return (
       <form className={styles.searchForm} onSubmit={this.getSearchValue}>
         <input
           type="text"
           autoComplete="off"
-          placeholder="Search images..."
+          // placeholder="Search images..."
+          placeholder={upperSearch}
           value={value}
           onChange={this.getValue}
           className={styles.searchFormInput}

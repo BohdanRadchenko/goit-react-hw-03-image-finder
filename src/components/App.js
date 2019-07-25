@@ -33,7 +33,7 @@ class App extends Component {
 
   componentDidMount() {
     const { searchValue, perPage } = this.state;
-    this.servicesAPI(searchValue);
+    this.servicesAPI(searchValue, perPage);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -41,18 +41,12 @@ class App extends Component {
     if (prevState.searchValue !== searchValue) {
       this.resetPerPage();
       this.servicesAPI(searchValue, perPage);
-      // if (items.length === 0) {
-      //   this.setState({
-      //     emptyItems: true,
-      //   });
-      // }
     }
     if (prevState.perPage !== perPage && perPage !== '12') {
       this.servicesAPI(searchValue, perPage);
-      // if (prevState.perPage !== perPage) {
-      //   console.log('work');
-      //   this.scrollPageToBottom();
-      // }
+    }
+    if (items.length > 12) {
+      this.scrollPageToBottom();
     }
   }
 
@@ -69,12 +63,10 @@ class App extends Component {
   };
 
   handleMoreClick = e => {
-    const { isWait } = this.state;
     const count = 12;
     this.setState(prevState => ({
       perPage: String(Number(prevState.perPage) + count),
     }));
-    isWait ? this.scrollPageToBottom() : null;
   };
 
   scrollPageToBottom = () => {
@@ -85,8 +77,7 @@ class App extends Component {
   };
 
   render() {
-    const { items, searchValue, perPage, emptyItems, isWait } = this.state;
-    console.log(isWait);
+    const { items, searchValue, emptyItems } = this.state;
     return (
       <div className={styles.app}>
         <SearchForm

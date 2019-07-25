@@ -11,8 +11,7 @@ const PhotoCard = ({
   comments,
   downloads,
 }) => (
-  <div>
-    {/* <div className={styles.photoCard}> */}
+  <div className={styles.photoCard}>
     <img className={styles.img} src={webformatURL} alt="" />
 
     <div className={styles.stats}>
@@ -36,7 +35,7 @@ const PhotoCard = ({
 
     {/* <!-- Кнопка для открытия модалки с большим изображением, появляется при наведении --> */}
     <button type="button" className={styles.fullscreenButton}>
-      <i className={styles.fullscreenIcon}>zoom_out_map</i>
+      <i className="material-icons">zoom_out_map</i>
     </button>
   </div>
 );

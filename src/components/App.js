@@ -16,11 +16,19 @@ class App extends Component {
   };
 
   servicesAPI = (searchValue, perPage) => {
+    this.setState({
+      isWait: true,
+    });
     axios
       .get(
         `https://pixabay.com/api/?image_type=photo&orientation=horizontal&q=${searchValue}&page=1&per_page=${perPage}&key=12869322-4857e225bc17e2a940faa9df9`,
       )
-      .then(({ data }) => this.setState({ items: data.hits }));
+      .then(({ data }) => this.setState({ items: data.hits }))
+      .finally(() =>
+        this.setState({
+          isWait: false,
+        }),
+      );
   };
 
   componentDidMount() {
@@ -29,7 +37,7 @@ class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { searchValue, perPage, items } = this.state;
+    const { searchValue, perPage, items, isWait } = this.state;
     if (prevState.searchValue !== searchValue) {
       this.resetPerPage();
       this.servicesAPI(searchValue, perPage);
@@ -41,6 +49,10 @@ class App extends Component {
     }
     if (prevState.perPage !== perPage && perPage !== '12') {
       this.servicesAPI(searchValue, perPage);
+      // if (prevState.perPage !== perPage) {
+      //   console.log('work');
+      //   this.scrollPageToBottom();
+      // }
     }
   }
 
@@ -56,15 +68,25 @@ class App extends Component {
     });
   };
 
-  handleMoreClick = () => {
+  handleMoreClick = e => {
+    const { isWait } = this.state;
     const count = 12;
     this.setState(prevState => ({
       perPage: String(Number(prevState.perPage) + count),
     }));
+    isWait ? this.scrollPageToBottom() : null;
+  };
+
+  scrollPageToBottom = () => {
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth',
+    });
   };
 
   render() {
-    const { items, searchValue, perPage, emptyItems } = this.state;
+    const { items, searchValue, perPage, emptyItems, isWait } = this.state;
+    console.log(isWait);
     return (
       <div className={styles.app}>
         <SearchForm

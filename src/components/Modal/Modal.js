@@ -15,26 +15,31 @@ export default class Modal extends Component {
 
   handleKeyPress = e => {
     if (e.code !== 'Escape') return;
-
     this.props.onClose();
   };
 
   handleBackdropClick = e => {
     const { current } = this.backdropRef;
-
     if (current && e.target !== current) {
       return;
     }
-
     this.props.onClose();
   };
 
   render() {
-    const { children } = this.props;
+    const { children, url } = this.props;
     return (
-      <div className={styles.overlay}>
-        <div className={styles.modal}>
-          <img src="" alt="" />
+      <div
+        className={styles.backdrop}
+        ref={this.backdropRef}
+        onClick={this.handleBackdropClick}
+      >
+        {/* <div className={styles.modal}>{children}</div> */}
+
+        <div className={styles.overlay}>
+          <div className={styles.modal}>
+            <img src={url} alt="" />
+          </div>
         </div>
       </div>
     );

@@ -77,7 +77,7 @@ class App extends Component {
   };
 
   render() {
-    const { items, searchValue, emptyItems } = this.state;
+    const { items, searchValue, emptyItems, isOpen } = this.state;
     return (
       <div className={styles.app}>
         <SearchForm

@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './PhotoCard.module.css';
+import Modal from '../Modal/Modal';
 
 const PhotoCard = ({
   webformatURL,
@@ -10,6 +11,9 @@ const PhotoCard = ({
   views,
   comments,
   downloads,
+  isOpen,
+  handleOpen,
+  handleClose,
 }) => (
   <div className={styles.photoCard}>
     <img className={styles.img} src={webformatURL} alt="" />
@@ -33,10 +37,16 @@ const PhotoCard = ({
       </p>
     </div>
 
-    {/* <!-- Кнопка для открытия модалки с большим изображением, появляется при наведении --> */}
-    <button type="button" className={styles.fullscreenButton}>
-      <i className="material-icons">zoom_out_map</i>
-    </button>
+    {!isOpen && (
+      <button
+        type="button"
+        className={styles.fullscreenButton}
+        onClick={handleOpen}
+      >
+        <i className="material-icons">zoom_out_map</i>
+      </button>
+    )}
+    {isOpen && <Modal url={largeImageURL} onClose={handleClose} />}
   </div>
 );
 

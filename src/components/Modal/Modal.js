@@ -3,6 +3,8 @@ import React, { Component, createRef } from 'react';
 import styles from './Modal.module.css';
 
 export default class Modal extends Component {
+  state = {};
+
   backdropRef = createRef();
 
   componentDidMount() {
@@ -34,13 +36,7 @@ export default class Modal extends Component {
         ref={this.backdropRef}
         onClick={this.handleBackdropClick}
       >
-        {/* <div className={styles.modal}>{children}</div> */}
-
-        <div className={styles.overlay}>
-          <div className={styles.modal}>
-            <img src={url} alt="" />
-          </div>
-        </div>
+        <div className={styles.modal}>{children}</div>
       </div>
     );
   }

@@ -1,9 +1,11 @@
-/*eslint-disable*/
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import PhotoCard from '../PhotoCard/PhotoCard';
 import styles from './Gallery.module.css';
 
 class Gallery extends Component {
+  state = {};
+
   render() {
     const { items } = this.props;
     return (
@@ -17,5 +19,9 @@ class Gallery extends Component {
     );
   }
 }
+
+Gallery.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+};
 
 export default Gallery;

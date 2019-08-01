@@ -1,5 +1,5 @@
-/*eslint-disable */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import styles from './SearchForm.module.css';
 
 class SearchForm extends Component {
@@ -36,13 +36,11 @@ class SearchForm extends Component {
 
   render() {
     const { value, upperSearch } = this.state;
-    const { searchValue } = this.props;
     return (
       <form className={styles.searchForm} onSubmit={this.getSearchValue}>
         <input
           type="text"
           autoComplete="off"
-          // placeholder="Search images..."
           placeholder={upperSearch}
           value={value}
           onChange={this.getValue}
@@ -52,5 +50,9 @@ class SearchForm extends Component {
     );
   }
 }
+
+SearchForm.propTypes = {
+  getSearchValue: PropTypes.func.isRequired,
+};
 
 export default SearchForm;

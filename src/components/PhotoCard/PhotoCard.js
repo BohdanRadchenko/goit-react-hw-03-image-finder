@@ -27,7 +27,6 @@ class PhotoCard extends Component {
       downloads,
     } = this.props;
     const { isModalOpen } = this.state;
-    console.log(isModalOpen);
     return (
       <div className={styles.photoCard}>
         <img className={styles.img} src={webformatURL} alt="" />
@@ -50,7 +49,6 @@ class PhotoCard extends Component {
             {downloads}
           </p>
         </div>
-
         {!isModalOpen && (
           <button
             type="button"

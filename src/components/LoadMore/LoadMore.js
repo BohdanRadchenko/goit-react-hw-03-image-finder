@@ -1,4 +1,3 @@
-/*eslint-disable*/
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './LoadMore.module.css';
@@ -11,6 +10,10 @@ const LoadMore = ({ handleMoreClick }) => {
       </button>
     </>
   );
+};
+
+LoadMore.propTypes = {
+  handleMoreClick: PropTypes.func.isRequired,
 };
 
 export default LoadMore;

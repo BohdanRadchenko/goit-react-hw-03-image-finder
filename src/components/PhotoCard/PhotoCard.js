@@ -1,4 +1,3 @@
-/*eslint-disable*/
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from './PhotoCard.module.css';
@@ -10,7 +9,6 @@ class PhotoCard extends Component {
   };
 
   handleToggleOpen = () => {
-    console.log('toogle modal');
     this.setState(state => ({
       isModalOpen: !state.isModalOpen,
     }));
@@ -71,5 +69,15 @@ class PhotoCard extends Component {
     );
   }
 }
+
+PhotoCard.propTypes = {
+  id: PropTypes.number.isRequired,
+  webformatURL: PropTypes.string.isRequired,
+  largeImageURL: PropTypes.string.isRequired,
+  likes: PropTypes.number.isRequired,
+  views: PropTypes.number.isRequired,
+  comments: PropTypes.number.isRequired,
+  downloads: PropTypes.number.isRequired,
+};
 
 export default PhotoCard;
